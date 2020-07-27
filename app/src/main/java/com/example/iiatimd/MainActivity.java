@@ -17,14 +17,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button scanBtn ;
+    Button scanBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scanBtn = findViewById(R.id.scanBtn);
+        scanBtn = findViewById (R.id.scanBtn);
         scanBtn.setOnClickListener(this);
     }
 

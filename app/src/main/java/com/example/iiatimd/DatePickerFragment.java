@@ -1,18 +1,24 @@
 package com.example.iiatimd;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class DatePickerFragment extends AppCompatActivity {
+public class DatePickerFragment extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "DatePickerFragment";
 
@@ -20,9 +26,24 @@ public class DatePickerFragment extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
+    public void onClick(View v) {
+        Log.d("Click Test", "Hallo ik ben geklikt");
+        setContentView(R.layout.activity_listview);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datepicker);
+
+        Button toSecondScreenButton = findViewById(R.id.toSecondScreen);
+        toSecondScreenButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openActivity2();
+            }
+        });
+
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +58,7 @@ public class DatePickerFragment extends AppCompatActivity {
                         DatePickerFragment.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -53,5 +74,9 @@ public class DatePickerFragment extends AppCompatActivity {
                 mDisplayDate.setText(date);
             }
         };
+    }
+    public void openActivity2(){
+        Intent intent = new Intent(this, List .class);
+        startActivity(intent);
     }
 }
