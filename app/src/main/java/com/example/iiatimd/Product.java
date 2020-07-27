@@ -7,24 +7,47 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Product {
 
-    @ColumnInfo
-    private String naam;
-
     @PrimaryKey
     private int uuid;
 
-    public Product (String naam, int uuid){
-        this.naam = naam;
-        this.uuid = uuid;
-    }
+    @ColumnInfo
+    private String naam;
 
-    public String getNaam(){
-        return this.naam;
+    @ColumnInfo
+    private String barcode;
+
+    @ColumnInfo
+    private String soort;
+
+    @ColumnInfo
+    private String notitie;
+
+
+    public Product (int uuid, String naam, String barcode, String soort, String notitie){
+        this.uuid = uuid;
+        this.naam = naam;
+        this.barcode = barcode;
+        this.soort = soort;
+        this.notitie = notitie;
     }
 
     public int getUuid(){
         return this.uuid;
     }
 
+    public String getNaam(){
+        return this.naam;
+    }
 
+    public String getBarcode(){
+        return this.barcode;
+    }
+
+    public String getSoort(){
+        return this.soort;
+    }
+
+    public String getNotitie(){
+        return this.notitie;
+    }
 }
