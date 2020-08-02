@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //test API
         RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://127.0.0.1:8000/api/producten/barcode/8711400408541", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/producten/barcode/8711400408540", null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("gelukt", response.toString());
