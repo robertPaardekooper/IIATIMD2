@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Test API----------------------------------------------------------------------------------
 
-        //Er wordt een nieuw product aangemaakt om aan de api toe te voegen
+        //Hier wordt een nieuw product aangemaakt om aan de api toe te voegen
         Map<String, String> testProduct = new HashMap();
         testProduct.put("naam", "Appel");
         testProduct.put("barcode", "8711400408541");
@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
+    //Met deze functie kan er een object toegevoegd worden aan de api
+    //Geef de url en een JSON object mee
     private void apiPOST(String url, JSONObject jsonObject){
 
         //RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
