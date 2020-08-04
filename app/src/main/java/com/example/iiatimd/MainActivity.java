@@ -66,17 +66,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         JSONObject testProductJson = new JSONObject(testProduct);
 
-        apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
+        //apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
 
-        apiGET("http://142.93.235.231/api/producten/barcode/8711400408540");
+        //apiGET("http://142.93.235.231/api/producten/barcode/8711400408540");
 
 
         //Barcode scanner---------------------------------------------------------------------------
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scanBtn = findViewById (R.id.scanBtn);
+        scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
+
+        Button lijstButton = findViewById(R.id.lijstBtn);
+        lijstButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                openLijst();
+            }
+        });
     }
 
     private void apiGET(String url){
@@ -97,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
+
 
     //Met deze functie kan er een object toegevoegd worden aan de api
     //Geef de url en een JSON object mee
@@ -123,6 +133,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         scanCode();
+    }
+
+    public void openLijst(){
+        Intent intent = new Intent(this, List .class);
+        startActivity(intent);
     }
 
     private void scanCode(){

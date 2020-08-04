@@ -21,11 +21,6 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CaptureAct"
@@ -34,14 +29,27 @@
             android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
-        <service android:name=".MyFirebaseMessagingService"
-                 android:exported="false">
+
+        <activity android:name=".DatePickerFragment">
+
+        </activity>
+        <activity android:name=".List">
+
+        </activity>
+        <activity android:name=".Aanmelden"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".Inloggen"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </service>
-        <activity android:name=".DatePickerFragment"></activity>
-        <activity android:name=".List"></activity>
+        </activity>
+
     </application>
 
 </manifest>
