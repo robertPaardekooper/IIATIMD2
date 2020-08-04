@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,7 +31,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Test room database
+        //Test room database------------------------------------------------------------------------
 //        Product[] producten = new Product[3];
 //        producten[0] = new Product(1, "Tompoes", "8711400408543", "Brood en Gebak", "Notitie test");
 
@@ -47,33 +52,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        new Thread(new InsertProductTask(db, producten[0])).start();
         //new Thread(new GetProductTask(db)).start();
 
-        //test API
-        RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/producten/barcode/8711400408540", null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("gelukt", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("gefaald", error.getMessage());
-            }
-        });
+        //Test API----------------------------------------------------------------------------------
 
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        //Er wordt een nieuw product aangemaakt om aan de api toe te voegen
+        Map<String, String> testProduct = new HashMap();
+        testProduct.put("naam", "Appel");
+        testProduct.put("barcode", "8711400408541");
+        testProduct.put("soort", "Groente en Fruit");
+        testProduct.put("houdbaarheidsdatum", "2020-08-10");
+        testProduct.put("notitie", "Appels zijn ook lekker.");
+        //testProduct.put("gebruiker_id", 1);
 
-        //final String URL = "http://127.0.0.1:8000/api/producten";
+        JSONObject testProductJson = new JSONObject(testProduct);
 
+        apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
+
+        apiGET("http://142.93.235.231/api/producten/barcode/8711400408540");
 
 
+        //Barcode scanner---------------------------------------------------------------------------
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         scanBtn = findViewById (R.id.scanBtn);
         scanBtn.setOnClickListener(this);
     }
+
+    private void apiGET(String url){
+
+        //RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("apiGETGelukt", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("apiGETGefaald", error.getMessage());
+            }
+        });
+
+        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
+    private void apiPOST(String url, JSONObject jsonObject){
+
+        //RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //Log.d("gelukt", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
 
     @Override
     public void onClick(View v){
