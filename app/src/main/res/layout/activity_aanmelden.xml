@@ -27,7 +27,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editText" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/inputPassword"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
@@ -42,7 +42,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEditText3" />
+            app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
         <EditText
             android:id="@+id/editText"
@@ -60,7 +60,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_marginBottom="8dp"
             android:text="Voornaam"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputEditText2"
+            app:layout_constraintBottom_toTopOf="@+id/inputVoornaam"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintStart_toStartOf="parent" />
@@ -91,7 +91,7 @@
             android:layout_marginBottom="8dp"
             android:text="Gebruikersnaam"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/textInputEditText3"
+            app:layout_constraintBottom_toTopOf="@+id/inputUsername"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.238"
             app:layout_constraintStart_toStartOf="parent" />
@@ -102,7 +102,7 @@
             android:layout_marginBottom="8dp"
             android:text="Wachtwoord"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText3"
+            app:layout_constraintBottom_toTopOf="@+id/inputPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.204"
             app:layout_constraintStart_toStartOf="parent" />
@@ -120,7 +120,7 @@
             app:layout_constraintVertical_bias="0.076" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText2"
+            android:id="@+id/inputVoornaam"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="56dp"
@@ -137,7 +137,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText3"
+            android:id="@+id/inputUsername"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
@@ -150,7 +150,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEditText2" />
+            app:layout_constraintTop_toBottomOf="@+id/inputVoornaam" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

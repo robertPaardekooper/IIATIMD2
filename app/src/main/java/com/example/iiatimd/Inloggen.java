@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+
 public class Inloggen extends AppCompatActivity {
 
     @Override
@@ -23,9 +25,11 @@ public class Inloggen extends AppCompatActivity {
         });
 
         Button aanmeldButton = findViewById(R.id.aanmeldButton);
+        RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
         aanmeldButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 openAanmelden();
             }
         });

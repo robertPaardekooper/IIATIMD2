@@ -66,9 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         JSONObject testProductJson = new JSONObject(testProduct);
 
-        //apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
+        API api = new API();
+        //api.apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
 
-        //apiGET("http://142.93.235.231/api/producten/barcode/8711400408540");
+        //api.apiGET("http://142.93.235.231/api/gebruikers");
 
 
         //Barcode scanner---------------------------------------------------------------------------
@@ -87,48 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
-    private void apiGET(String url){
-
-        //RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("apiGETGelukt", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("apiGETGefaald", error.getMessage());
-            }
-        });
-
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-    }
-
-
-    //Met deze functie kan er een object toegevoegd worden aan de api
-    //Geef de url en een JSON object mee
-    private void apiPOST(String url, JSONObject jsonObject){
-
-        //RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                //Log.d("gelukt", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-    }
-
 
     @Override
     public void onClick(View v){
