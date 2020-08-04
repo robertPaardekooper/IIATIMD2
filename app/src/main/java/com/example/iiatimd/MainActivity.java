@@ -66,19 +66,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //final String URL = "http://127.0.0.1:8000/api/producten";
 
 
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        scanBtn = findViewById (R.id.scanBtn);
+        scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
+
+        Button lijstButton = findViewById(R.id.lijstBtn);
+        lijstButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                openLijst();
+            }
+        });
     }
 
     @Override
     public void onClick(View v){
         scanCode();
+    }
+
+    public void openLijst(){
+        Intent intent = new Intent(this, List .class);
+        startActivity(intent);
     }
 
     private void scanCode(){
