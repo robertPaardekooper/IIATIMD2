@@ -27,7 +27,6 @@ public class DatePickerFragment extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        Log.d("Click Test", "Hallo ik ben geklikt");
         setContentView(R.layout.activity_listview);
     }
 
