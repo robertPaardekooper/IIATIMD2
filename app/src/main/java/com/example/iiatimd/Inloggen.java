@@ -20,6 +20,8 @@ public class Inloggen extends AppCompatActivity {
         inlogButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                API api = new API();
+                api.apiGET("http://142.93.235.231/api/gebruikers");
                 openMainActivity();
             }
         });

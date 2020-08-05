@@ -33,14 +33,14 @@ public class Aanmelden extends AppCompatActivity {
             public void onClick(View v){
 
                 Map<String, String> userMap = new HashMap();
-                userMap.put("name", inputUsername.getText().toString());
+                userMap.put("naam", inputUsername.getText().toString());
                 userMap.put("email", "test@test.nl");
-                userMap.put("password", inputPassword.getText().toString());
+                userMap.put("wachtwoord", inputPassword.getText().toString());
 
                 JSONObject userJson = new JSONObject(userMap);
 
                 API api = new API();
-                //api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
+                api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
 
 
 
