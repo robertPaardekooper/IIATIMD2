@@ -41,14 +41,15 @@
             android:singleLine="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/textInputEditText3" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="64dp"
             android:background="#FFFFFF"
             android:ems="10"
             android:inputType="textPassword"
@@ -59,7 +60,8 @@
             android:singleLine="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
         <TextView
@@ -70,8 +72,8 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditText2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.181"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline4" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,8 +83,8 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/editText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.343"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline4" />
 
         <TextView
             android:id="@+id/textView10"
@@ -93,8 +95,8 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textInputEditText3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.238"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline4" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,8 +106,8 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/editText3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.204"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline4" />
 
         <TextView
             android:id="@+id/textView9"
@@ -117,10 +119,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.076" />
+            app:layout_constraintVertical_bias="0.065" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="26dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText2"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="68dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText3"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="56dp"
@@ -132,24 +158,8 @@
             android:singleLine="true"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText3"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="60dp"
-            android:background="#FFFFFF"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="5dp"
-            android:singleLine="true"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/textInputEditText2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

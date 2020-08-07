@@ -31,9 +31,7 @@ public class Product {
         this.notitie = notitie;
     }
 
-    public int getUuid(){
-        return this.uuid;
-    }
+    public int getUuid(){ return this.uuid; }
 
     public String getNaam(){
         return this.naam;

@@ -14,7 +14,7 @@ public interface ProductDAO {
     List<Product> getAll();
 
     @Insert
-    void insertProduct(Product product);
+    void InsertProduct(Product product);
 
     @Delete
     void delete(Product product);

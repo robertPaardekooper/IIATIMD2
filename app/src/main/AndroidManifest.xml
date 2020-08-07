@@ -29,11 +29,11 @@
             android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
-        <activity android:name=".DatePickerFragment">
-
+        <activity android:name=".DatePickerFragment"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".List">
-
+        <activity android:name=".List"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".Aanmelden"
             android:theme="@style/AppTheme.NoActionBar">

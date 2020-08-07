@@ -13,7 +13,7 @@ public class InsertProductTask implements Runnable{
     }
     @Override
     public void run() {
-        db.productDAO().insertProduct(this.product);
+        db.productDAO().InsertProduct(this.product);
         String naam = db.productDAO().getAll().get(0).getBarcode();
         Log.d("NaInsert", naam);
     }

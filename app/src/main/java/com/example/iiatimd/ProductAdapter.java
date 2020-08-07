@@ -9,19 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private String[] products;
+    private Product[] products;
 
-    public ListView(String[] villagers){
-        this.products = villagers;
+    public ProductAdapter(Product[] products){
+        this.products = products;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
+        public TextView naamProduct;
+        public TextView datumProduct;
         public ProductViewHolder(View v){
             super(v);
-            textView = v.findViewById(R.id.textView2);
+            naamProduct = v.findViewById(R.id.textView2);
+            datumProduct = v.findViewById(R.id.textView3);
         }
     }
 
@@ -35,7 +37,8 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.textView.setText(products[position]);
+        holder.naamProduct.setText(products[position].getNaam());
+        holder.datumProduct.setText(products[position].getNotitie());
     }
 
     @Override
