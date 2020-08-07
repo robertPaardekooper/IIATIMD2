@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Test room database------------------------------------------------------------------------
+        // Test room database------------------------------------------------------------------------
 //        Product[] producten = new Product[3];
 //        producten[0] = new Product(1, "Tompoes", "8711400408543", "Brood en Gebak", "Notitie test");
 
@@ -53,26 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //new Thread(new GetProductTask(db)).start();
 
 
-        //Test API----------------------------------------------------------------------------------
-
-        //Hier wordt een nieuw product aangemaakt om aan de api toe te voegen
-        Map<String, String> testProduct = new HashMap();
-        testProduct.put("naam", "Appel");
-        testProduct.put("barcode", "8711400408541");
-        testProduct.put("soort", "Groente en Fruit");
-        testProduct.put("houdbaarheidsdatum", "2020-08-10");
-        testProduct.put("notitie", "Appels zijn ook lekker.");
-        //testProduct.put("gebruiker_id", 1);
-
-        JSONObject testProductJson = new JSONObject(testProduct);
-
-        API api = new API();
-        //api.apiPOST("http://142.93.235.231/api/productToevoegen", testProductJson);
-
-        //api.apiGET("http://142.93.235.231/api/gebruikers");
+        // Test API----------------------------------------------------------------------------------
 
 
-        //Barcode scanner---------------------------------------------------------------------------
+
+        // Barcode scanner---------------------------------------------------------------------------
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

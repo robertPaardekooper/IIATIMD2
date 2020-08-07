@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/inputPasswordVerfification" />
 
         <EditText
             android:id="@+id/inputPassword"
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/inputPasswordVerfification"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
@@ -79,7 +79,7 @@
             android:layout_marginBottom="8dp"
             android:text="Wachtwoord (Herhalen)"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintBottom_toTopOf="@+id/inputPasswordVerfification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.343"
             app:layout_constraintStart_toStartOf="parent" />
