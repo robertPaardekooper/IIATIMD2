@@ -3,8 +3,6 @@ package com.example.iiatimd;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.LogPrinter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +26,8 @@ public class Aanmelden extends AppCompatActivity {
 
 
         Button signUpButton = findViewById(R.id.buttonSignUp);
-        final TextInputEditText inputUsername = findViewById(R.id.inputUsername);
+        final TextInputEditText inputUsername = findViewById(R.id.inputEmail);
+        final TextInputEditText inputEmail = findViewById(R.id.inputEmail);
         final EditText inputPassword = findViewById(R.id.inputPassword);
         final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerfification);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -39,7 +38,7 @@ public class Aanmelden extends AppCompatActivity {
 
                 Map<String, String> userMap = new HashMap();
                 userMap.put("naam", inputUsername.getText().toString());
-                userMap.put("email", "test@test.nl");
+                userMap.put("email", inputEmail.getText().toString());
                 userMap.put("wachtwoord", inputPassword.getText().toString());
 
                 JSONObject userJson = new JSONObject(userMap);

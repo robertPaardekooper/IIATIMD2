@@ -44,31 +44,5 @@ public class API extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
-    public String apiGET(String url){
 
-        final String[] naam = {new String()};
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("apiGETGelukt", response.toString());
-                        try {
-                            naam[0] = response.get("naam").toString();
-                            Log.d("responseWerkt", naam[0]);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("apiGETGefaald", error.getMessage());
-            }
-        });
-
-        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-
-        return naam[0];
-    }
 }
