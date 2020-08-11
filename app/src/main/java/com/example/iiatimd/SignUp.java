@@ -10,26 +10,24 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Aanmelden extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_sign_up);
 
 
-        Button submitButtonRegistration = findViewById(R.id.submitButtonRegistration);
-        final EditText inputUsername = findViewById(R.id.inputUsernameRegistration);
-        final EditText inputEmail = findViewById(R.id.inputEmailRegistration);
-        final EditText inputPassword = findViewById(R.id.inputPasswordRegistration);
-        final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerificationRegistration);
+        Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
+        final EditText inputUsername = findViewById(R.id.inputUsernameSignUp);
+        final EditText inputEmail = findViewById(R.id.inputEmailSignUp);
+        final EditText inputPassword = findViewById(R.id.inputPasswordSignUp);
+        final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerificationSignUp);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         submitButtonRegistration.setOnClickListener(new View.OnClickListener(){

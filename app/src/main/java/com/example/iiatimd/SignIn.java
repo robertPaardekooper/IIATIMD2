@@ -21,31 +21,32 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Inloggen extends AppCompatActivity {
+public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inloggen);
+        setContentView(R.layout.activity_sign_in);
 
-        Button inlogButton = findViewById(R.id.loginButton);
-        final TextInputEditText inputEmail = findViewById(R.id.inputEmail);
-        final EditText inputPassword = findViewById(R.id.inputPassword);
+        final EditText inputEmail = findViewById(R.id.inputEmailSignIn);
+        final EditText inputPassword = findViewById(R.id.inputPasswordSignIn);
+        Button submitButtonSignIn = findViewById(R.id.submitButtonSignIn);
+        Button openSignUpButton = findViewById(R.id.openSignUpButton);
 
         RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        inlogButton.setOnClickListener(new View.OnClickListener(){
+        submitButtonSignIn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 checkPassword(inputEmail.getText().toString(), inputPassword.getText().toString());
             }
         });
 
-        Button aanmeldButton = findViewById(R.id.aanmeldButton);
-        aanmeldButton.setOnClickListener(new View.OnClickListener(){
+
+        openSignUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openAanmelden();
+                openSignUp();
             }
         });
     }
@@ -55,12 +56,12 @@ public class Inloggen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openAanmelden(){
-        Intent intent = new Intent(this, Aanmelden .class);
+    public void openSignUp(){
+        Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
     }
 
-    // Haalt het wachtwoord die bij het e-mailadres hoort op en verifieerd of deze klopt
+    // Haalt het wachtwoord die bij het e-mailadres hoort op en verifieërd of deze klopt
     // Als deze klopt dan wordt de gebruiker naar de main activity doorgestuurd
     // Anders krijgt de gebruiker een foutmelding
     public void checkPassword(String email, final String password) {
