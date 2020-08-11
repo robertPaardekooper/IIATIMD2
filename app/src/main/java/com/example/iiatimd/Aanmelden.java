@@ -22,17 +22,17 @@ public class Aanmelden extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aanmelden);
+        setContentView(R.layout.activity_registration);
 
 
-        Button signUpButton = findViewById(R.id.buttonSignUp);
-        final TextInputEditText inputUsername = findViewById(R.id.inputEmail);
-        final TextInputEditText inputEmail = findViewById(R.id.inputEmail);
-        final EditText inputPassword = findViewById(R.id.inputPassword);
-        final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerfification);
+        Button submitButtonRegistration = findViewById(R.id.submitButtonRegistration);
+        final EditText inputUsername = findViewById(R.id.inputUsernameRegistration);
+        final EditText inputEmail = findViewById(R.id.inputEmailRegistration);
+        final EditText inputPassword = findViewById(R.id.inputPasswordRegistration);
+        final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerificationRegistration);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        signUpButton.setOnClickListener(new View.OnClickListener(){
+        submitButtonRegistration.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
