@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Product.class}, version = 11)
+@Database(entities = {Product.class}, version = 12)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ProductDAO productDAO();
 
@@ -20,6 +20,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     private static AppDatabase create(final Context context){
-        return Room.databaseBuilder(context, AppDatabase.class, "producten").fallbackToDestructiveMigration().build();
+        return Room.databaseBuilder(context, AppDatabase.class, "products").fallbackToDestructiveMigration().build();
     }
 }

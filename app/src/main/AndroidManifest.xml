@@ -30,7 +30,7 @@
 
         </activity>
 
-        <activity android:name=".DatePickerFragment">
+        <activity android:name=".AddProduct">
 
         </activity>
         <activity android:name=".List">

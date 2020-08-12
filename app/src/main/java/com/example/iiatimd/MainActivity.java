@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents() != null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -110,12 +110,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }).setPositiveButton("Bevestigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this,DatePickerFragment.class);
+                        Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                        intent.putExtra("SCAN_RESULT", result.getContents());
                         startActivity(intent);
                     }
                 });
-                AlertDialog diaglog = builder.create();
-                diaglog.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
             else {
                 Toast.makeText(this, "No Results", Toast.LENGTH_LONG).show();

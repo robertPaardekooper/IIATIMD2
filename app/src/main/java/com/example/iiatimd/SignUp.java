@@ -23,18 +23,19 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
 
-        Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
+
         final EditText inputUsername = findViewById(R.id.inputUsernameSignUp);
         final EditText inputEmail = findViewById(R.id.inputEmailSignUp);
         final EditText inputPassword = findViewById(R.id.inputPasswordSignUp);
         final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerificationSignUp);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
 
         submitButtonRegistration.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
-                Map<String, String> userMap = new HashMap();
+                HashMap userMap = new HashMap();
                 userMap.put("naam", inputUsername.getText().toString());
                 userMap.put("email", inputEmail.getText().toString());
                 userMap.put("wachtwoord", inputPassword.getText().toString());
