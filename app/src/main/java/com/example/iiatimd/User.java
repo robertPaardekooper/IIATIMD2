@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Product {
+public class User {
 
     @PrimaryKey(autoGenerate = true)
     private int uuid;
@@ -14,21 +14,20 @@ public class Product {
     private String naam;
 
     @ColumnInfo
-    private String barcode;
+    private String email;
 
     @ColumnInfo
-    private String soort;
+    private String wachtwoord;
 
     @ColumnInfo
-    private String notitie;
+    private boolean loggedIn;
 
-
-    public Product (int uuid, String naam, String barcode, String soort, String notitie){
+    public User (int uuid, String naam, String email, String wachtwoord, boolean loggedIn){
         this.uuid = uuid;
         this.naam = naam;
-        this.barcode = barcode;
-        this.soort = soort;
-        this.notitie = notitie;
+        this.email = email;
+        this.wachtwoord = wachtwoord;
+        this.loggedIn = loggedIn;
     }
 
     public int getUuid(){
@@ -39,15 +38,15 @@ public class Product {
         return this.naam;
     }
 
-    public String getBarcode(){
-        return this.barcode;
+    public String getEmail(){
+        return this.email;
     }
 
-    public String getSoort(){
-        return this.soort;
+    public String getWachtwoord(){
+        return this.wachtwoord;
     }
 
-    public String getNotitie(){
-        return this.notitie;
+    public boolean getLoggedIn(){
+        return this.loggedIn;
     }
 }

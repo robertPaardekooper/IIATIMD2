@@ -3,6 +3,7 @@ package com.example.iiatimd;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +23,6 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-
         final EditText inputUsername = findViewById(R.id.inputUsernameSignUp);
         final EditText inputEmail = findViewById(R.id.inputEmailSignUp);
         final EditText inputPassword = findViewById(R.id.inputPasswordSignUp);
@@ -31,14 +30,21 @@ public class SignUp extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
 
+        final AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        new Thread(new GetUserTask(db)).start();
+
         submitButtonRegistration.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
+                String username = inputUsername.getText().toString();
+                String email = inputEmail.getText().toString();
+                String password = inputPassword.getText().toString();
+
                 HashMap userMap = new HashMap();
-                userMap.put("naam", inputUsername.getText().toString());
-                userMap.put("email", inputEmail.getText().toString());
-                userMap.put("wachtwoord", inputPassword.getText().toString());
+                userMap.put("naam", username);
+                userMap.put("email", email);
+                userMap.put("wachtwoord", password);
 
                 JSONObject userJson = new JSONObject(userMap);
 
@@ -47,6 +53,13 @@ public class SignUp extends AppCompatActivity {
                 if(inputPassword.getText().toString().equals(inputPasswordVerification.getText().toString())) {
                     API api = new API();
                     api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
+
+                    User newUser = new User(0, username, email, password, true);
+                    // De gebruiker wordt eerst voor de zekerheid uitgelogd
+                    // Zo is er altijd maar een iemand ingelogd
+                    new Thread(new LogOutUserTask(db)).start();
+                    new Thread(new InsertUserTask(db, newUser)).start();
+
                     openMainActivity();
                 } else {
                     builder.setTitle("Wachtwoorden komen niet overeen");

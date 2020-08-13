@@ -42,7 +42,6 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-
         openSignUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -64,7 +63,7 @@ public class SignIn extends AppCompatActivity {
     // Haalt het wachtwoord die bij het e-mailadres hoort op en verifieërd of deze klopt
     // Als deze klopt dan wordt de gebruiker naar de main activity doorgestuurd
     // Anders krijgt de gebruiker een foutmelding
-    public void checkPassword(String email, final String password) {
+    public void checkPassword(final String email, final String password) {
         final AlertDialog.Builder dataIncorrectBuilder = new AlertDialog.Builder(this);
         final AlertDialog.Builder otherErrorBuilder = new AlertDialog.Builder(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/gebruikers/" + email, null, new Response.Listener<JSONObject>() {
@@ -72,6 +71,11 @@ public class SignIn extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     if (password.equals(response.get("wachtwoord"))){
+                        // Gebruiker wordt voor de zekerheid uitgelogd
+                        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+                        new Thread(new LogOutUserTask(db)).start();
+                        // Vervolgens wordt de gebruiker ingelogd
+                        new Thread(new LogInUserTask(db, email)).start();
                         openMainActivity();
                     } else if(!password.equals(response.get("wachtwoord"))){
                         dataIncorrectBuilder.setTitle("E-mailadres of wachtwoord incorrect");

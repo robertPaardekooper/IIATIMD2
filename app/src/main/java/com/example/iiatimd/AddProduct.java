@@ -67,10 +67,10 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
                 api.apiPOST("http://142.93.235.231/api/productToevoegen", productJson);
 
                 // Nieuw product wordt toegevoegd aan room database
-                Product newProduct = new Product(1, name, barcode, category, note);
+                Product newProduct = new Product(0, name, barcode, category, note);
                 AppDatabase db = AppDatabase.getInstance(getApplicationContext());
                 new Thread(new InsertProductTask(db, newProduct)).start();
-                new Thread(new GetProductTask(db)).start();
+                //new Thread(new GetProductTask(db)).start();
             }
         });
 
