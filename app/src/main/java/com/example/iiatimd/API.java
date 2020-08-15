@@ -38,6 +38,7 @@ public class API extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Log.d("mislukt", error.toString());
             }
         });
 

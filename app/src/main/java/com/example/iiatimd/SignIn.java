@@ -64,8 +64,10 @@ public class SignIn extends AppCompatActivity {
     // Als deze klopt dan wordt de gebruiker naar de main activity doorgestuurd
     // Anders krijgt de gebruiker een foutmelding
     public void checkPassword(final String email, final String password) {
+
         final AlertDialog.Builder dataIncorrectBuilder = new AlertDialog.Builder(this);
         final AlertDialog.Builder otherErrorBuilder = new AlertDialog.Builder(this);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/gebruikers/" + email, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -104,7 +106,7 @@ public class SignIn extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("apiGETGefaald", error.getMessage());
+                error.printStackTrace();
             }
         });
 

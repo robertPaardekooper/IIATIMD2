@@ -50,4 +50,8 @@ public class Product {
     public String getNotitie(){
         return this.notitie;
     }
+
+    public void setNaam(String newNaam) {
+        this.naam = newNaam;
+    }
 }

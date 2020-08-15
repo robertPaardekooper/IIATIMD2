@@ -11,17 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
-    private String[] products;
+    private Product[] products;
 
-    public ListView(String[] villagers){
+    public ListView(Product[] villagers){
         this.products = villagers;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
+        public TextView name;
+        public TextView category;
         public ProductViewHolder(View v){
             super(v);
-            textView = v.findViewById(R.id.textView2);
+            name = v.findViewById(R.id.recyclerName);
+            category = v.findViewById(R.id.recyclerCategory);
         }
     }
 
@@ -35,7 +37,8 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.textView.setText(products[position]);
+        holder.name.setText(products[position].getNaam());
+        holder.category.setText(products[position].getSoort());
     }
 
     @Override

@@ -47,6 +47,8 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
             @Override
             public void onClick(View v){
 
+                AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+
                 String name = inputProductName.getText().toString();
                 String barcode = getIntent().getStringExtra("SCAN_RESULT");
                 String date = inputDate.getText().toString();
@@ -58,7 +60,7 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
                 productMap.put("soort", category);
                 productMap.put("houdbaarheidsdatum", date);
                 productMap.put("notitie", note);
-                //productMap.put("gebruiker_id", 1);
+                productMap.put("gebruiker_email", "TijsRuigrok15@gmail.com");
 
                 JSONObject productJson = new JSONObject(productMap);
 
@@ -68,7 +70,6 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
 
                 // Nieuw product wordt toegevoegd aan room database
                 Product newProduct = new Product(0, name, barcode, category, note);
-                AppDatabase db = AppDatabase.getInstance(getApplicationContext());
                 new Thread(new InsertProductTask(db, newProduct)).start();
                 //new Thread(new GetProductTask(db)).start();
             }

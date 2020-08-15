@@ -6,6 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="132dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmailSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/logo" />
+
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
@@ -43,13 +55,13 @@
         android:id="@+id/inputUsernameSignUp"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/inputPasswordSignUp"
@@ -99,7 +111,8 @@
 
     <Button
         android:id="@+id/submitButtonSignUp"
-        android:layout_width="wrap_content"
+        style="@style/ButtonPrimaryStyle"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Registreer"
         app:layout_constraintBottom_toBottomOf="parent"

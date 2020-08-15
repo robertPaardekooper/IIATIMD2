@@ -18,9 +18,9 @@ public class LogInUserTask implements Runnable {
     public void run() {
         db.userDAO().logInUser(email);
 
-        List<User> users =  db.userDAO().getAll();
-        for (int i = 0; i < users.size(); i++) {
-            Log.d("User " + i, users.get(i).getNaam() + " - " + users.get(i).getLoggedIn());
-        }
+//        List<User> users =  db.userDAO().getAll();
+//        for (int i = 0; i < users.size(); i++) {
+//            Log.d("User " + i, users.get(i).getNaam() + " - " + users.get(i).getLoggedIn());
+//        }
     }
 }

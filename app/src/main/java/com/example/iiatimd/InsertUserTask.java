@@ -15,7 +15,7 @@ public class InsertUserTask implements Runnable{
     @Override
     public void run() {
         db.userDAO().insertUser(this.user);
-        String naam = db.userDAO().getLoggedInUser().get(0).getNaam();
-        Log.d("NaInsert", naam);
+        //String naam = db.userDAO().getLoggedInUser().get(0).getNaam();
+        //Log.d("NaInsert", naam);
     }
 }

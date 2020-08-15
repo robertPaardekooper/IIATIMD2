@@ -31,7 +31,7 @@ public class SignUp extends AppCompatActivity {
         Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
 
         final AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        new Thread(new GetUserTask(db)).start();
+        //new Thread(new GetUserTask(db)).start();
 
         submitButtonRegistration.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -54,14 +54,18 @@ public class SignUp extends AppCompatActivity {
                     API api = new API();
                     api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
 
-                    User newUser = new User(0, username, email, password, true);
+
                     // De gebruiker wordt eerst voor de zekerheid uitgelogd
                     // Zo is er altijd maar een iemand ingelogd
                     new Thread(new LogOutUserTask(db)).start();
+                    // Nieuwe gebruiker wordt aan de room database toegevoegd
+                    User newUser = new User(0, username, email, password, true);
                     new Thread(new InsertUserTask(db, newUser)).start();
 
                     openMainActivity();
-                } else {
+                }
+
+                else {
                     builder.setTitle("Wachtwoorden komen niet overeen");
                     builder.setPositiveButton("Probeer opnieuw", new DialogInterface.OnClickListener() {
                         @Override
