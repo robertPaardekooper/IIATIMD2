@@ -37,10 +37,10 @@
         app:layout_constraintVertical_bias="0.492" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/inputPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="60dp"
         android:background="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
@@ -53,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
 
     <TextView
         android:id="@+id/textView8"
@@ -71,10 +71,10 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Gebruikersnaam"
+        android:layout_marginBottom="8dp"
+        android:text="E-mailadres"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
@@ -83,10 +83,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Wachtwoord"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+        app:layout_constraintBottom_toTopOf="@+id/inputPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
@@ -96,14 +96,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="26dp" />
+        app:layout_constraintGuide_begin="55dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/inputEmail"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
         android:background="#FFFFFF"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
@@ -112,7 +113,7 @@
         android:singleLine="true"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 

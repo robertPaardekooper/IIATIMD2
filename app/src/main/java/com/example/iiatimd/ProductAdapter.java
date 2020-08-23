@@ -9,21 +9,27 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
     private Product[] products;
 
-    public ProductAdapter(Product[] products){
-        this.products = products;
+    public ListView(Product[] villagers){
+        this.products = villagers;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
-        public TextView naamProduct;
-        public TextView datumProduct;
+        public TextView name;
+        public TextView category;
+        public TextView date;
+        public TextView barcode;
+        public TextView note;
         public ProductViewHolder(View v){
             super(v);
-            naamProduct = v.findViewById(R.id.textView2);
-            datumProduct = v.findViewById(R.id.textView3);
+            name = v.findViewById(R.id.recyclerName);
+            category = v.findViewById(R.id.recyclerCategory);
+            date = v.findViewById(R.id.recyclerDate);
+            barcode = v.findViewById(R.id.recyclerBarcode);
+            note = v.findViewById(R.id.recyclerNote);
         }
     }
 
@@ -37,8 +43,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.naamProduct.setText(products[position].getNaam());
-        holder.datumProduct.setText(products[position].getNotitie());
+        holder.name.setText(products[position].getNaam());
+        holder.category.setText(products[position].getSoort());
+        holder.date.setText(products[position].getHoudbaarheidsdatum());
+        holder.barcode.setText(products[position].getBarcode());
+        holder.note.setText(products[position].getNotitie());
     }
 
     @Override

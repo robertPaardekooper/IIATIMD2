@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Product {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int uuid;
 
     @ColumnInfo
@@ -20,14 +20,17 @@ public class Product {
     private String soort;
 
     @ColumnInfo
+    private String houdbaarheidsdatum;
+
+    @ColumnInfo
     private String notitie;
 
-
-    public Product (int uuid, String naam, String barcode, String soort, String notitie){
+    public Product (int uuid, String naam, String barcode, String soort, String houdbaarheidsdatum, String notitie){
         this.uuid = uuid;
         this.naam = naam;
         this.barcode = barcode;
         this.soort = soort;
+        this.houdbaarheidsdatum = houdbaarheidsdatum;
         this.notitie = notitie;
     }
 
@@ -43,6 +46,10 @@ public class Product {
 
     public String getSoort(){
         return this.soort;
+    }
+
+    public String getHoudbaarheidsdatum(){
+        return this.houdbaarheidsdatum;
     }
 
     public String getNotitie(){

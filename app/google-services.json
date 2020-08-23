@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "659017378874",
+    "firebase_url": "https://iiatimd-908a3.firebaseio.com",
+    "project_id": "iiatimd-908a3",
+    "storage_bucket": "iiatimd-908a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659017378874:android:3af976b6f4b2baf5bed903",
+        "android_client_info": {
+          "package_name": "com.example.iiatimd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659017378874-v2hukar1ngja7r6upa43g9o2s3vmh719.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTpzW1RP1Og0xCoxtO8gCfYkc0KSvjh0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659017378874-v2hukar1ngja7r6upa43g9o2s3vmh719.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_storage_list"
+        android:icon="@drawable/ic_storage_list_black_24dp"
+        android:title="@string/title_storage_list" />
+
+    <item
+        android:id="@+id/navigation_new_product"
+        android:icon="@drawable/ic_new_product_black_24dp"
+        android:title="@string/title_new_product" />
+
+    <item
+        android:id="@+id/navigation_grocery_list"
+        android:icon="@drawable/ic_grocery_list_black_24dp"
+        android:title="@string/title_grocery_list" />
+
+</menu>
