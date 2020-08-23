@@ -29,6 +29,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline7" />
 
     <EditText
+        android:maxLength="24"
         android:id="@+id/inputProductName"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -53,6 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
 
     <EditText
+        android:maxLength="66"
         android:id="@+id/inputNote"
         android:layout_width="250dp"
         android:layout_height="100dp"
@@ -85,7 +87,8 @@
 
     <Button
         android:id="@+id/addProductButton"
-        android:layout_width="wrap_content"
+        style="@style/ButtonPrimaryStyle"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/add_product"
         app:layout_constraintBottom_toBottomOf="parent"

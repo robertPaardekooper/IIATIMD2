@@ -20,10 +20,16 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
         public TextView name;
         public TextView category;
+        public TextView date;
+        public TextView barcode;
+        public TextView note;
         public ProductViewHolder(View v){
             super(v);
             name = v.findViewById(R.id.recyclerName);
             category = v.findViewById(R.id.recyclerCategory);
+            date = v.findViewById(R.id.recyclerDate);
+            barcode = v.findViewById(R.id.recyclerBarcode);
+            note = v.findViewById(R.id.recyclerNote);
         }
     }
 
@@ -39,6 +45,9 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText(products[position].getNaam());
         holder.category.setText(products[position].getSoort());
+        holder.date.setText(products[position].getHoudbaarheidsdatum());
+        holder.barcode.setText(products[position].getBarcode());
+        holder.note.setText(products[position].getNotitie());
     }
 
     @Override

@@ -20,14 +20,17 @@ public class Product {
     private String soort;
 
     @ColumnInfo
+    private String houdbaarheidsdatum;
+
+    @ColumnInfo
     private String notitie;
 
-
-    public Product (int uuid, String naam, String barcode, String soort, String notitie){
+    public Product (int uuid, String naam, String barcode, String soort, String houdbaarheidsdatum, String notitie){
         this.uuid = uuid;
         this.naam = naam;
         this.barcode = barcode;
         this.soort = soort;
+        this.houdbaarheidsdatum = houdbaarheidsdatum;
         this.notitie = notitie;
     }
 
@@ -47,11 +50,11 @@ public class Product {
         return this.soort;
     }
 
-    public String getNotitie(){
-        return this.notitie;
+    public String getHoudbaarheidsdatum(){
+        return this.houdbaarheidsdatum;
     }
 
-    public void setNaam(String newNaam) {
-        this.naam = newNaam;
+    public String getNotitie(){
+        return this.notitie;
     }
 }

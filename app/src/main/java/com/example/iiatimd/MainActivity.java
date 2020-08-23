@@ -44,21 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Test room database------------------------------------------------------------------------
-//        Product[] producten = new Product[3];
-//        producten[0] = new Product(1, "Tompoes", "8711400408543", "Brood en Gebak", "Notitie test");
 
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-
-//        new Thread(new InsertProductTask(db, producten[0])).start();
-        //new Thread(new GetProductTask(db)).start();
-
-
-        // Test API----------------------------------------------------------------------------------
-
-
-
-        // Barcode scanner---------------------------------------------------------------------------
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -81,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openLijst(){
-        Intent intent = new Intent(this, List .class);
+        Intent intent = new Intent(this, ListView .class);
         startActivity(intent);
     }
 

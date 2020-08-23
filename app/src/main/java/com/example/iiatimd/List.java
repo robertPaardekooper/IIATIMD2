@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,14 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        NavigationFragment navigationFragment = new NavigationFragment();
+        fragmentTransaction.add(R.id.navigationFragmentContainer, navigationFragment);
+
+        fragmentTransaction.commit();
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -49,6 +59,7 @@ public class List extends AppCompatActivity {
                                 response.getJSONObject(i).get("naam").toString(),
                                 response.getJSONObject(i).get("barcode").toString(),
                                 response.getJSONObject(i).get("soort").toString(),
+                                response.getJSONObject(i).get("houdbaarheidsdatum").toString(),
                                 response.getJSONObject(i).get("notitie").toString()
                                 );
                     } catch (JSONException e) {
