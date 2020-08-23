@@ -1,10 +1,8 @@
 package com.example.iiatimd;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,13 +13,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-public class List extends AppCompatActivity {
+public class ListGroceries extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -29,13 +25,10 @@ public class List extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listview);
+        setContentView(R.layout.activity_listview_groceries);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        NavigationFragment navigationFragment = new NavigationFragment();
-        fragmentTransaction.add(R.id.navigationFragmentContainer, navigationFragment);
 
         fragmentTransaction.commit();
 
@@ -61,13 +54,13 @@ public class List extends AppCompatActivity {
                                 response.getJSONObject(i).get("soort").toString(),
                                 response.getJSONObject(i).get("houdbaarheidsdatum").toString(),
                                 response.getJSONObject(i).get("notitie").toString()
-                                );
+                        );
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
                 Log.d("producten", products.toString());
-                recyclerViewAdapter = new ListView(products);
+                recyclerViewAdapter = new ListViewStorage(products);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
         }, new Response.ErrorListener() {

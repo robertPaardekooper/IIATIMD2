@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
+public class ListViewGroceries extends RecyclerView.Adapter<ListViewStorage.ProductViewHolder> {
 
     private Product[] products;
 
-    public ListView(Product[] villagers){
+    public ListViewGroceries(Product[] villagers){
         this.products = villagers;
     }
 
@@ -35,17 +35,16 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListViewStorage.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.product_card, parent, false);
-        ProductViewHolder productViewHolder = new ProductViewHolder(v);
+        ListViewStorage.ProductViewHolder productViewHolder = new ListViewStorage.ProductViewHolder(v);
         return productViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListViewStorage.ProductViewHolder holder, int position) {
         holder.name.setText(products[position].getNaam());
         holder.category.setText(products[position].getSoort());
-        holder.date.setText(products[position].getHoudbaarheidsdatum());
         holder.barcode.setText(products[position].getBarcode());
         holder.note.setText(products[position].getNotitie());
     }

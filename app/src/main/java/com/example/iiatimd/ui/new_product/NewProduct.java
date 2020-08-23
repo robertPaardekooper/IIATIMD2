@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.iiatimd.R;
 
-public class DashboardFragment extends Fragment {
+public class NewProduct extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
 

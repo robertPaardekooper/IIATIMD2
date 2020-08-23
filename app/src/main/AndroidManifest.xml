@@ -30,7 +30,8 @@
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity android:name=".AddProduct"></activity>
-        <activity android:name=".List"></activity>
+        <activity android:name=".ListStorage"></activity>
+        <activity android:name=".ListGroceries"></activity>
         <activity
             android:name=".SignUp"
             android:theme="@style/AppTheme.NoActionBar"></activity>

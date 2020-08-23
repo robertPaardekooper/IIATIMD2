@@ -3,10 +3,7 @@ package com.example.iiatimd;
 import android.app.Activity;
 import android.content.Intent;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -77,7 +74,7 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
 
     }
     public void openList(){
-        Intent intent = new Intent(this, List .class);
+        Intent intent = new Intent(this, ListStorage.class);
         startActivity(intent);
     }
 
