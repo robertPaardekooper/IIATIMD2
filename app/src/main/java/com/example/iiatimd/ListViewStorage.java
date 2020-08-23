@@ -1,5 +1,6 @@
 package com.example.iiatimd;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.ProductViewHolder> {
 
@@ -43,6 +47,7 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         return productViewHolder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText(products[position].getNaam());
@@ -50,6 +55,12 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         holder.date.setText(products[position].getHoudbaarheidsdatum());
         holder.barcode.setText(products[position].getBarcode());
         holder.note.setText(products[position].getNotitie());
+
+        Date currentTime = Calendar.getInstance().getTime();
+
+        if(products[position].getHoudbaarheidsdatum().equals(currentTime)) {
+            holder.date.setTextColor(R.color.dateRedColor);
+        }
     }
 
     @Override

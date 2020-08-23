@@ -10,4 +10,7 @@
     <color name="firstColor">#393E57</color>
     <color name="secondColor">#FF5722</color>
     <color name="backgroundColor">#A5D0F3</color>
+
+    <color name="dateRedColor">#f55318</color>
+
 </resources>
