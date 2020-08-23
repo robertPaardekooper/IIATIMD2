@@ -1,6 +1,7 @@
 package com.example.iiatimd;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.ProductViewHolder> {
 
-    private Product[] products;
+    private ProductInRecycler[] products;
 
-    public ListViewStorage(Product[] villagers){
-        this.products = villagers;
+    public ListViewStorage(ProductInRecycler[] products){
+        this.products = products;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
@@ -55,17 +53,28 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText(products[position].getNaam());
         holder.category.setText(products[position].getSoort());
-        holder.date.setText(products[position].getHoudbaarheidsdatum());
+        holder.date.setText(products[position].getHoudbaarheidsdatum().toString());
         holder.barcode.setText(products[position].getBarcode());
         holder.note.setText(products[position].getNotitie());
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        try {
+            Date date = sdf.parse(currentDate.toString());
 
-        if(products[position].getHoudbaarheidsdatum().equals(dateFormat.format(date))) {
-            holder.date.setTextColor(R.color.dateRedColor);
+            if(products[position].getHoudbaarheidsdatum().after(date)) {
+                holder.date.setTextColor(R.color.dateRedColor);
+                holder.date.setTextColor(Color.RED);
+                Log.d("hoi50", "datum werkt");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
+
+
     }
+
 
     @Override
     public int getItemCount() {

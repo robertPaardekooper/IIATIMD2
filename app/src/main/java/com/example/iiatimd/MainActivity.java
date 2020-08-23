@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openLijst(){
-        Intent intent = new Intent(this, ListGroceries.class);
+        Intent intent = new Intent(this, ListStorage.class);
         startActivity(intent);
     }
 

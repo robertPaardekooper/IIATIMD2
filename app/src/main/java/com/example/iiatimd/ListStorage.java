@@ -26,6 +26,10 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ListStorage extends AppCompatActivity implements View.OnClickListener{
     FloatingActionButton scanBtn;
     private RecyclerView recyclerView;
@@ -51,19 +55,24 @@ public class ListStorage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(JSONArray response) {
                 //String[] products = new String[response.length()];
-                Product[] products = new Product[response.length()];
+                ProductInRecycler[] products = new ProductInRecycler[response.length()];
+
+                String[] dateStringList = new String[response.length()];
+                Date[] customDateList = new Date[response.length()];
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        //products[i].setNaam(response.getJSONObject(i).get("naam").toString());
-                        products[i] = new Product( 0,
+                        dateStringList[i] = response.getJSONObject(i).get("houdbaarheidsdatum").toString();
+                        customDateList[i] = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringList[i]);
+
+                        products[i] = new ProductInRecycler(
                                 response.getJSONObject(i).get("naam").toString(),
                                 response.getJSONObject(i).get("barcode").toString(),
                                 response.getJSONObject(i).get("soort").toString(),
-                                response.getJSONObject(i).get("houdbaarheidsdatum").toString(),
+                                customDateList[i],
                                 response.getJSONObject(i).get("notitie").toString()
                                 );
-                    } catch (JSONException e) {
+                    } catch (JSONException | ParseException e) {
                         e.printStackTrace();
                     }
                 }
