@@ -51,7 +51,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void openMainActivity(){
-        Intent intent = new Intent(this, ListViewStorage .class);
+        Intent intent = new Intent(this, ListStorage .class);
         startActivity(intent);
     }
 
