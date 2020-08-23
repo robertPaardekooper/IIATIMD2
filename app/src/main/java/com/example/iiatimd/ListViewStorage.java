@@ -62,7 +62,8 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
-        if(products[position].getHoudbaarheidsdatum().equals(dateFormat.format(date))) {
+        if(products[position].getHoudbaarheidsdatum().equals(dateFormat.format(date).toString())) {
+            Log.d("hoi", products[position].getHoudbaarheidsdatum());
             holder.date.setTextColor(R.color.dateRedColor);
         }
     }
