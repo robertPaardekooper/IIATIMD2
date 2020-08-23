@@ -1,6 +1,7 @@
 package com.example.iiatimd;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -56,9 +59,10 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         holder.barcode.setText(products[position].getBarcode());
         holder.note.setText(products[position].getNotitie());
 
-        Date currentTime = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
 
-        if(products[position].getHoudbaarheidsdatum().equals(currentTime)) {
+        if(products[position].getHoudbaarheidsdatum().equals(dateFormat.format(date))) {
             holder.date.setTextColor(R.color.dateRedColor);
         }
     }

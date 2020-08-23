@@ -21,12 +21,23 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+//        Date currentTime = Calendar.getInstance().getTime();
+        Log.d("hoi2", dateFormat.format(date));
 
         final EditText inputEmail = findViewById(R.id.inputEmailSignIn);
         final EditText inputPassword = findViewById(R.id.inputPasswordSignIn);
