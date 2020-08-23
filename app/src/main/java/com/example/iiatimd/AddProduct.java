@@ -69,6 +69,8 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
                 Product newProduct = new Product(0, name, barcode, category, date, note);
                 new Thread(new InsertProductTask(db, newProduct)).start();
                 //new Thread(new GetProductTask(db)).start();
+
+                openList();
             }
         });
 
