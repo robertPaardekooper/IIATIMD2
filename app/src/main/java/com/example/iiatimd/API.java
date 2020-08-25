@@ -25,8 +25,8 @@ public class API extends AppCompatActivity {
 
     }
 
-    //Met deze functie kan er een object toegevoegd worden aan de api
-    //Geef de url en een JSON object mee
+    // Met deze functie kan er een object toegevoegd worden aan de api
+    // Geef de url en een JSON object mee
     public void apiPOST(String url, JSONObject jsonObject){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
