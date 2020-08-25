@@ -62,10 +62,12 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         try {
             Date date = sdf.parse(currentDate.toString());
 
+            Log.d("huidigeDatum", date.toString());
+            Log.d("houdbaarheidsdatum", products[position].getHoudbaarheidsdatum().toString());
+
             if(products[position].getHoudbaarheidsdatum().after(date)) {
                 holder.date.setTextColor(R.color.dateRedColor);
-                holder.date.setTextColor(Color.RED);
-                Log.d("hoi50", "datum werkt");
+
             }
         } catch (ParseException e) {
             e.printStackTrace();

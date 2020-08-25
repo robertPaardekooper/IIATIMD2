@@ -54,7 +54,6 @@ public class ListStorage extends AppCompatActivity implements View.OnClickListen
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/producten/email/TijsRuigrok15@gmail.com", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                //String[] products = new String[response.length()];
                 ProductInRecycler[] products = new ProductInRecycler[response.length()];
 
                 String[] dateStringList = new String[response.length()];
