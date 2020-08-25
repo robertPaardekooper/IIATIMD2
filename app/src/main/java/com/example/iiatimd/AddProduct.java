@@ -76,7 +76,7 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
 
     }
     public void openList(){
-        Intent intent = new Intent(this, ListStorage.class);
+        Intent intent = new Intent(this, List.class);
         startActivity(intent);
     }
 

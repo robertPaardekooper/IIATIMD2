@@ -32,12 +32,4 @@
         <item>Snacks</item>
         <item>Overig</item>
     </string-array>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
-    <string name="title_activity_storage_list">MainActivity</string>
-    <string name="title_storage_list">Voorraad</string>
-    <string name="title_new_product">Nieuw product</string>
-    <string name="title_grocery_list">Boodschappenlijst</string>
 </resources>

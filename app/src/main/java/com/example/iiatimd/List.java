@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ListStorage extends AppCompatActivity implements View.OnClickListener{
+public class List extends AppCompatActivity implements View.OnClickListener{
     FloatingActionButton scanBtn;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
@@ -39,7 +36,7 @@ public class ListStorage extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listview_storage);
+        setContentView(R.layout.activity_listview);
 
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
@@ -76,7 +73,7 @@ public class ListStorage extends AppCompatActivity implements View.OnClickListen
                     }
                 }
                 Log.d("producten", products.toString());
-                recyclerViewAdapter = new ListViewStorage(products);
+                recyclerViewAdapter = new ListView(products);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
         }, new Response.ErrorListener() {
@@ -119,7 +116,7 @@ public class ListStorage extends AppCompatActivity implements View.OnClickListen
                 }).setPositiveButton("Bevestigen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(ListStorage.this, AddProduct.class);
+                        Intent intent = new Intent(List.this, AddProduct.class);
                         intent.putExtra("SCAN_RESULT", result.getContents());
                         startActivity(intent);
                     }

@@ -1,5 +1,7 @@
 package com.example.iiatimd;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListViewGroceries extends RecyclerView.Adapter<ListViewStorage.ProductViewHolder> {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    private Product[] products;
+public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
-    public ListViewGroceries(Product[] villagers){
-        this.products = villagers;
+    private ProductInRecycler[] products;
+
+    public ListView(ProductInRecycler[] products){
+        this.products = products;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
@@ -35,22 +41,45 @@ public class ListViewGroceries extends RecyclerView.Adapter<ListViewStorage.Prod
 
     @NonNull
     @Override
-    public ListViewStorage.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.product_card, parent, false);
-        ListViewStorage.ProductViewHolder productViewHolder = new ListViewStorage.ProductViewHolder(v);
+        ProductViewHolder productViewHolder = new ProductViewHolder(v);
         return productViewHolder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull ListViewStorage.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.name.setText(products[position].getNaam());
         holder.category.setText(products[position].getSoort());
+        holder.date.setText(products[position].getHoudbaarheidsdatum().toString());
         holder.barcode.setText(products[position].getBarcode());
         holder.note.setText(products[position].getNotitie());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+        try {
+            Date date = sdf.parse(currentDate.toString());
+
+            Log.d("huidigeDatum", date.toString());
+            Log.d("houdbaarheidsdatum", products[position].getHoudbaarheidsdatum().toString());
+
+            if(products[position].getHoudbaarheidsdatum().after(date)) {
+                holder.date.setTextColor(R.color.dateRedColor);
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
+
 
     @Override
     public int getItemCount() {
         return products.length;
     }
 }
+

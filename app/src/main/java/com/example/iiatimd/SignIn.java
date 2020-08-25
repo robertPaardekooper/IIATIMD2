@@ -16,14 +16,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class SignIn extends AppCompatActivity {
@@ -62,7 +60,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void openMainActivity(){
-        Intent intent = new Intent(this, ListStorage .class);
+        Intent intent = new Intent(this, List.class);
         startActivity(intent);
     }
 
