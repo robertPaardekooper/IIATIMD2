@@ -48,31 +48,24 @@ public class List extends AppCompatActivity implements View.OnClickListener{
 
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/producten/email/TijsRuigrok15@gmail.com", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/productsInList/email/TijsRuigrok15@gmail.com", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                ProductInRecycler[] products = new ProductInRecycler[response.length()];
 
-                String[] dateStringList = new String[response.length()];
-                Date[] customDateList = new Date[response.length()];
+                ProductInRecycler[] products = new ProductInRecycler[response.length()];
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        dateStringList[i] = response.getJSONObject(i).get("houdbaarheidsdatum").toString();
-                        customDateList[i] = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringList[i]);
-
                         products[i] = new ProductInRecycler(
-                                response.getJSONObject(i).get("naam").toString(),
+                                response.getJSONObject(i).get("name").toString(),
                                 response.getJSONObject(i).get("barcode").toString(),
-                                response.getJSONObject(i).get("soort").toString(),
-                                customDateList[i],
-                                response.getJSONObject(i).get("notitie").toString()
-                                );
-                    } catch (JSONException | ParseException e) {
+                                response.getJSONObject(i).get("expiration_date").toString(),
+                                response.getJSONObject(i).get("note").toString()
+                        );
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                Log.d("producten", products.toString());
                 recyclerViewAdapter = new ListView(products);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }

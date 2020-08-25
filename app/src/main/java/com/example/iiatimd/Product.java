@@ -11,48 +11,40 @@ public class Product {
     private int uuid;
 
     @ColumnInfo
-    private String naam;
+    private String name;
 
     @ColumnInfo
     private String barcode;
 
     @ColumnInfo
-    private String soort;
+    private String expirationDate;
 
     @ColumnInfo
-    private String houdbaarheidsdatum;
+    private String note;
 
-    @ColumnInfo
-    private String notitie;
-
-    public Product (int uuid, String naam, String barcode, String soort, String houdbaarheidsdatum, String notitie){
+    public Product (int uuid, String name, String barcode, String expirationDate, String note){
         this.uuid = uuid;
-        this.naam = naam;
+        this.name = name;
         this.barcode = barcode;
-        this.soort = soort;
-        this.houdbaarheidsdatum = houdbaarheidsdatum;
-        this.notitie = notitie;
+        this.expirationDate = expirationDate;
+        this.note = note;
     }
 
     public int getUuid(){ return this.uuid; }
 
-    public String getNaam(){
-        return this.naam;
+    public String getName(){
+        return this.name;
     }
 
     public String getBarcode(){
         return this.barcode;
     }
 
-    public String getSoort(){
-        return this.soort;
+    public String getExpirationDate(){
+        return this.expirationDate;
     }
 
-    public String getHoudbaarheidsdatum(){
-        return this.houdbaarheidsdatum;
-    }
-
-    public String getNotitie(){
-        return this.notitie;
+    public String getNote(){
+        return this.note;
     }
 }

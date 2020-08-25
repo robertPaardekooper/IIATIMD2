@@ -40,9 +40,9 @@ public class SignUp extends AppCompatActivity {
                 String password = inputPassword.getText().toString();
 
                 HashMap userMap = new HashMap();
-                userMap.put("naam", username);
+                userMap.put("name", username);
                 userMap.put("email", email);
-                userMap.put("wachtwoord", password);
+                userMap.put("password", password);
 
                 JSONObject userJson = new JSONObject(userMap);
 
@@ -50,8 +50,7 @@ public class SignUp extends AppCompatActivity {
                 // krijgt de gebruiker een foutmelding
                 if(inputPassword.getText().toString().equals(inputPasswordVerification.getText().toString())) {
                     API api = new API();
-                    api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
-
+                    api.apiPOST("http://142.93.235.231/api/addUser", userJson);
 
                     // De gebruiker wordt eerst voor de zekerheid uitgelogd
                     // Zo is er altijd maar een iemand ingelogd

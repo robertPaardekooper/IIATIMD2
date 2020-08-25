@@ -1,6 +1,7 @@
 package com.example.iiatimd;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
@@ -29,6 +31,7 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
         public TextView date;
         public TextView barcode;
         public TextView note;
+
         public ProductViewHolder(View v){
             super(v);
             name = v.findViewById(R.id.recyclerName);
@@ -47,35 +50,27 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
         return productViewHolder;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.name.setText(products[position].getNaam());
-        holder.category.setText(products[position].getSoort());
-        holder.date.setText(products[position].getHoudbaarheidsdatum().toString());
+        holder.name.setText(products[position].getName());
+        holder.date.setText(products[position].getExpirationDate());
         holder.barcode.setText(products[position].getBarcode());
-        holder.note.setText(products[position].getNotitie());
+        holder.note.setText(products[position].getNote());
 
+        // Als product over de datum is dan wordt
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
+
         try {
-            Date date = sdf.parse(currentDate.toString());
+            Date expirationDate = sdf.parse(products[position].getExpirationDate());
 
-            Log.d("huidigeDatum", date.toString());
-            Log.d("houdbaarheidsdatum", products[position].getHoudbaarheidsdatum().toString());
-
-            if(products[position].getHoudbaarheidsdatum().after(date)) {
-                holder.date.setTextColor(R.color.dateRedColor);
-
+            if(currentDate.after(expirationDate)) {
+                holder.date.setTextColor(Color.parseColor("#FA5858"));
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
     }
-
 
     @Override
     public int getItemCount() {
