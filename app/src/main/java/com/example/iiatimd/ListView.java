@@ -129,6 +129,8 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
                         .addToRequestQueue(jsonObjectRequest);
 
                 // TODO: refresh pagina
+                Intent intent = new Intent (v.getContext(), List.class);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
 
