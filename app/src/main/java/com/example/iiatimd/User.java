@@ -11,22 +11,22 @@ public class User {
     private int uuid;
 
     @ColumnInfo
-    private String naam;
+    private String name;
 
     @ColumnInfo
     private String email;
 
     @ColumnInfo
-    private String wachtwoord;
+    private String password;
 
     @ColumnInfo
     private boolean loggedIn;
 
-    public User (int uuid, String naam, String email, String wachtwoord, boolean loggedIn){
+    public User (int uuid, String name, String email, String password, boolean loggedIn){
         this.uuid = uuid;
-        this.naam = naam;
+        this.name = name;
         this.email = email;
-        this.wachtwoord = wachtwoord;
+        this.password = password;
         this.loggedIn = loggedIn;
     }
 
@@ -34,16 +34,16 @@ public class User {
         return this.uuid;
     }
 
-    public String getNaam(){
-        return this.naam;
+    public String getName(){
+        return this.name;
     }
 
     public String getEmail(){
         return this.email;
     }
 
-    public String getWachtwoord(){
-        return this.wachtwoord;
+    public String getPassword(){
+        return this.password;
     }
 
     public boolean getLoggedIn(){

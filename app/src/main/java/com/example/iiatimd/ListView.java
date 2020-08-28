@@ -2,6 +2,7 @@ package com.example.iiatimd;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.common.util.Strings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,7 +38,6 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
         public ProductViewHolder(View v){
             super(v);
             name = v.findViewById(R.id.recyclerName);
-            category = v.findViewById(R.id.recyclerCategory);
             date = v.findViewById(R.id.recyclerDate);
             barcode = v.findViewById(R.id.recyclerBarcode);
             note = v.findViewById(R.id.recyclerNote);
@@ -55,9 +57,18 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
         holder.name.setText(products[position].getName());
         holder.date.setText(products[position].getExpirationDate());
         holder.barcode.setText(products[position].getBarcode());
-        holder.note.setText(products[position].getNote());
 
-        // Als product over de datum is dan wordt
+        // Notitie wordt niet weergeven als deze null is
+        if (products[position].getNote() != null &&
+                !products[position].getNote().isEmpty() &&
+                !products[position].getNote().equals("null")) {
+
+            holder.note.setText(products[position].getNote());
+        } else {
+            holder.note.setText("");
+        }
+
+        // Als product over de datum is dan wordt het rood gekleurd
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
 

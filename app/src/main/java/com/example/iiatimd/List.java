@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -46,9 +47,21 @@ public class List extends AppCompatActivity implements View.OnClickListener{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
 
+        RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/productsInList/email/TijsRuigrok15@gmail.com", null, new Response.Listener<JSONArray>() {
+        GetLoggedInUserEmailTask getLoggedInUserEmailTask = new GetLoggedInUserEmailTask(db);
+        Thread thread = new Thread(getLoggedInUserEmailTask);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String email = getLoggedInUserEmailTask.getEmail();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/productsInList/email/" + email, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
@@ -83,7 +96,6 @@ public class List extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         scanCode();
     }
-
 
     private void scanCode(){
         IntentIntegrator integrator = new IntentIntegrator(this);

@@ -15,21 +15,13 @@
     <string name="sign_up">Registreer</string>
     <string name="sign_in">Log in</string>
 
+    <string name="barcode">Barcode</string>
+    <string name="add_product_title">Product toevoegen</string>
+
     <string name="product_name">Naam</string>
     <string name="expiration_date">Houdbaarheidsdatum</string>
-    <string name="expiration_date_hint">Jaar - Maand - Dag </string>
+    <string name="expiration_date_hint">Dag - Maand - Jaar </string>
     <string name="note">Notitie</string>
     <string name="add_product">Voeg toe</string>
 
-    <string name="category">Soort</string>
-    <string-array name="product_category_array">
-        <item>Groente en Fruit</item>
-        <item>Vlees, Vis en Vega</item>
-        <item>Boter, Eieren, Zuivel en Kaas</item>
-        <item>Brood en Gebak</item>
-        <item>Drinken</item>
-        <item>Drank</item>
-        <item>Snacks</item>
-        <item>Overig</item>
-    </string-array>
 </resources>
