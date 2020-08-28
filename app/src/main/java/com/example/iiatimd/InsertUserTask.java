@@ -2,6 +2,8 @@ package com.example.iiatimd;
 
 import android.util.Log;
 
+import java.util.List;
+
 public class InsertUserTask implements Runnable{
 
     AppDatabase db;
@@ -14,8 +16,13 @@ public class InsertUserTask implements Runnable{
 
     @Override
     public void run() {
+        db.userDAO().logOutUser();
         db.userDAO().insertUser(this.user);
-        //String naam = db.userDAO().getLoggedInUser().get(0).getNaam();
-        //Log.d("NaInsert", naam);
+
+        // TODO: log verwijderen
+        List<User> users =  db.userDAO().getAll();
+        for (int i = 0; i < users.size(); i++) {
+            Log.d("User " + i, users.get(i).getName() + " - " + users.get(i).getLoggedIn());
+        }
     }
 }

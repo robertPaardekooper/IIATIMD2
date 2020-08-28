@@ -1,36 +1,26 @@
 package com.example.iiatimd;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class Product {
+import java.util.Date;
 
-    @PrimaryKey(autoGenerate = true)
-    private int uuid;
+public class ProductInRecycler {
 
-    @ColumnInfo
     private String name;
 
-    @ColumnInfo
     private String barcode;
 
-    @ColumnInfo
     private String expirationDate;
 
-    @ColumnInfo
     private String note;
 
-    public Product (int uuid, String name, String barcode, String expirationDate, String note){
-        this.uuid = uuid;
+    public ProductInRecycler (String name, String barcode, String expirationDate, String note){
         this.name = name;
         this.barcode = barcode;
         this.expirationDate = expirationDate;
         this.note = note;
     }
-
-    public int getUuid(){ return this.uuid; }
 
     public String getName(){
         return this.name;

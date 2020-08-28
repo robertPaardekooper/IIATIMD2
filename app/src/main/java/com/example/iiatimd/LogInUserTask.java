@@ -16,11 +16,13 @@ public class LogInUserTask implements Runnable {
 
     @Override
     public void run() {
+        db.userDAO().logOutUser();
         db.userDAO().logInUser(email);
 
-//        List<User> users =  db.userDAO().getAll();
-//        for (int i = 0; i < users.size(); i++) {
-//            Log.d("User " + i, users.get(i).getNaam() + " - " + users.get(i).getLoggedIn());
-//        }
+        // TODO: log verwijderen
+        List<User> users =  db.userDAO().getAll();
+        for (int i = 0; i < users.size(); i++) {
+            Log.d("User " + i, users.get(i).getName() + " - " + users.get(i).getLoggedIn());
+        }
     }
 }

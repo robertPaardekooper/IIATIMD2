@@ -12,7 +12,7 @@ public class GetProductTask implements Runnable {
 
     @Override
     public void run() {
-        String naam = db.productDAO().getAll().get(0).getNaam();
+        String naam = db.productDAO().getAll().get(0).getName();
         Log.d("getProductTask", naam);
     }
 }

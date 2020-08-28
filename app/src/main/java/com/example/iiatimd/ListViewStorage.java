@@ -1,6 +1,8 @@
 package com.example.iiatimd;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.google.android.gms.common.util.Strings;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Date;
 
-public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.ProductViewHolder> {
+public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
 
-    private Product[] products;
+    private ProductInRecycler[] products;
 
-    public ListViewStorage(Product[] villagers){
-        this.products = villagers;
+    public ListView(ProductInRecycler[] products){
+        this.products = products;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
@@ -32,10 +34,10 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         public TextView date;
         public TextView barcode;
         public TextView note;
+
         public ProductViewHolder(View v){
             super(v);
             name = v.findViewById(R.id.recyclerName);
-            category = v.findViewById(R.id.recyclerCategory);
             date = v.findViewById(R.id.recyclerDate);
             barcode = v.findViewById(R.id.recyclerBarcode);
             note = v.findViewById(R.id.recyclerNote);
@@ -50,21 +52,34 @@ public class ListViewStorage extends RecyclerView.Adapter<ListViewStorage.Produc
         return productViewHolder;
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.name.setText(products[position].getNaam());
-        holder.category.setText(products[position].getSoort());
-        holder.date.setText(products[position].getHoudbaarheidsdatum());
+        holder.name.setText(products[position].getName());
+        holder.date.setText(products[position].getExpirationDate());
         holder.barcode.setText(products[position].getBarcode());
-        holder.note.setText(products[position].getNotitie());
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        // Notitie wordt niet weergeven als deze null is
+        if (products[position].getNote() != null &&
+                !products[position].getNote().isEmpty() &&
+                !products[position].getNote().equals("null")) {
 
-        if(products[position].getHoudbaarheidsdatum().equals(dateFormat.format(date).toString())) {
-            Log.d("hoi", products[position].getHoudbaarheidsdatum());
-            holder.date.setTextColor(R.color.dateRedColor);
+            holder.note.setText(products[position].getNote());
+        } else {
+            holder.note.setText("");
+        }
+
+        // Als product over de datum is dan wordt het rood gekleurd
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date();
+
+        try {
+            Date expirationDate = sdf.parse(products[position].getExpirationDate());
+
+            if(currentDate.after(expirationDate)) {
+                holder.date.setTextColor(Color.parseColor("#FA5858"));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

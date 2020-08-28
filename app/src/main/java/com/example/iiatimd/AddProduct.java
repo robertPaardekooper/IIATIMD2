@@ -1,44 +1,77 @@
 package com.example.iiatimd;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class AddProduct extends Activity implements AdapterView.OnItemSelectedListener {
-
-    String category = new String();
+public class AddProduct extends Activity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
-        final EditText inputProductName = findViewById(R.id.inputProductName);
+        final String barcode = getIntent().getStringExtra("SCAN_RESULT");
+
+        final TextView addProductName = findViewById(R.id.addProductName);
+        final TextView addProductBarcode = findViewById(R.id.addProductBarcode);
+        addProductBarcode.setText(barcode);
+
         final EditText inputDate = findViewById(R.id.inputDate);
         final EditText inputNote = findViewById(R.id.inputNote);
         final Button addProductButton = findViewById(R.id.addProductButton);
 
-        // Spinner (dropdown menu) voor de verschillende soorten
-        Spinner categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
-        categorySpinner.setOnItemSelectedListener(this);
-        // Adapter voor spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.product_category_array, android.R.layout.simple_spinner_item);
-        // Styling van de spinner
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Adapter aan spinner toevoegen
-        categorySpinner.setAdapter(adapter);
+        RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                "http://142.93.235.231/api/products/barcode/" + barcode, null,
+                new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    addProductName.setText(response.get("name").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+
+
+        // TODO: houdbaarheidsdatum aanpassen zo dat gebruiker geen foute data kan versturen
 
         addProductButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -46,29 +79,35 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
 
                 AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-                String name = inputProductName.getText().toString();
-                String barcode = getIntent().getStringExtra("SCAN_RESULT");
+                GetLoggedInUserEmailTask getLoggedInUserEmailTask = new GetLoggedInUserEmailTask(db);
+                Thread thread = new Thread(getLoggedInUserEmailTask);
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                String email = getLoggedInUserEmailTask.getEmail();
+
                 String date = inputDate.getText().toString();
                 String note = inputNote.getText().toString();
 
                 HashMap productMap = new HashMap();
-                productMap.put("naam", name);
-                productMap.put("barcode", barcode);
-                productMap.put("soort", category);
-                productMap.put("houdbaarheidsdatum", date);
-                productMap.put("notitie", note);
-                productMap.put("gebruiker_email", "TijsRuigrok15@gmail.com");
+                productMap.put("product_barcode", barcode);
+                productMap.put("android_user_email", email);
+                productMap.put("expiration_date", date);
+                productMap.put("note", note);
 
                 JSONObject productJson = new JSONObject(productMap);
 
                 // Niew product wordt toegevoegd aan laravel API
                 API api = new API();
-                api.apiPOST("http://142.93.235.231/api/productToevoegen", productJson);
+                api.apiPOST("http://142.93.235.231/api/addProductInList", productJson);
 
                 // Nieuw product wordt toegevoegd aan room database
-                Product newProduct = new Product(0, name, barcode, category, date, note);
-                new Thread(new InsertProductTask(db, newProduct)).start();
-                //new Thread(new GetProductTask(db)).start();
+                // TODO: product aan room database toevoegen voor offline gebruik
+//                Product newProduct = new Product(0, name, barcode, date, note);
+//                new Thread(new InsertProductTask(db, newProduct)).start();
 
                 openList();
             }
@@ -78,16 +117,5 @@ public class AddProduct extends Activity implements AdapterView.OnItemSelectedLi
     public void openList(){
         Intent intent = new Intent(this, ListStorage.class);
         startActivity(intent);
-    }
-
-    // Als een van de soorten geselecteerd wordt, dan wordt de waarde aangepast
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        category = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

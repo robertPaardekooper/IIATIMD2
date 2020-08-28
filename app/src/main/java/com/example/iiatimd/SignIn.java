@@ -2,12 +2,14 @@ package com.example.iiatimd;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,28 +18,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class SignIn extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-
-//        Date currentTime = Calendar.getInstance().getTime();
-        Log.d("hoi2", dateFormat.format(date));
 
         final EditText inputEmail = findViewById(R.id.inputEmailSignIn);
         final EditText inputPassword = findViewById(R.id.inputPasswordSignIn);
@@ -62,7 +58,7 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void openMainActivity(){
-        Intent intent = new Intent(this, ListStorage .class);
+        Intent intent = new Intent(this, List.class);
         startActivity(intent);
     }
 
@@ -71,42 +67,41 @@ public class SignIn extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // TODO: code verbeteren, liefst opdelen in meerdere functies
     // Haalt het wachtwoord die bij het e-mailadres hoort op en verifieërd of deze klopt
     // Als deze klopt dan wordt de gebruiker naar de main activity doorgestuurd
     // Anders krijgt de gebruiker een foutmelding
     public void checkPassword(final String email, final String password) {
 
         final AlertDialog.Builder dataIncorrectBuilder = new AlertDialog.Builder(this);
-        final AlertDialog.Builder otherErrorBuilder = new AlertDialog.Builder(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/gebruikers/" + email, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/users/" + email, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (password.equals(response.get("wachtwoord"))){
-                        // Gebruiker wordt voor de zekerheid uitgelogd
+                    if (password.equals(response.get("password"))){
+
                         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-                        new Thread(new LogOutUserTask(db)).start();
-                        // Vervolgens wordt de gebruiker ingelogd
-                        new Thread(new LogInUserTask(db, email)).start();
+
+                        LogInUserTask logInUserTask = new LogInUserTask(db, email);
+                        Thread thread = new Thread(logInUserTask);
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                         openMainActivity();
-                    } else if(!password.equals(response.get("wachtwoord"))){
+
+                    } else if(!password.equals(response.get("password"))){
+
                         dataIncorrectBuilder.setTitle("E-mailadres of wachtwoord incorrect");
                         dataIncorrectBuilder.setPositiveButton("Probeer opnieuw", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) { }
                         });
+
                         AlertDialog dialog = dataIncorrectBuilder.create();
-                        dialog.show();
-                    }
-                    // Werkt momenteel niet, moet in gang gaan als gegevens niet kunnen worden opgehaald
-                    else {
-                        otherErrorBuilder.setTitle("Er is iets misgegaan");
-                        otherErrorBuilder.setPositiveButton("Probeer opnieuw", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) { }
-                        });
-                        AlertDialog dialog = otherErrorBuilder.create();
                         dialog.show();
                     }
 

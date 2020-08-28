@@ -11,6 +11,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -30,8 +32,9 @@ public class SignUp extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
 
+        RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
+
         final AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        //new Thread(new GetUserTask(db)).start();
 
         submitButtonRegistration.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -42,32 +45,40 @@ public class SignUp extends AppCompatActivity {
                 String password = inputPassword.getText().toString();
 
                 HashMap userMap = new HashMap();
-                userMap.put("naam", username);
+                userMap.put("name", username);
                 userMap.put("email", email);
-                userMap.put("wachtwoord", password);
+                userMap.put("password", password);
 
                 JSONObject userJson = new JSONObject(userMap);
 
+                // TODO: betere beveiliging maken, gebruiker niet doorsturen als account al bestaat
                 // Als de twee wachtwoord velden gelijk zijn wordt het account toegevoegd anders
                 // krijgt de gebruiker een foutmelding
-                if(inputPassword.getText().toString().equals(inputPasswordVerification.getText().toString())) {
+                if(inputPassword.getText().toString().equals(
+                        inputPasswordVerification.getText().toString())) {
+
                     API api = new API();
-                    api.apiPOST("http://142.93.235.231/api/gebruikerToevoegen", userJson);
+                    api.apiPOST("http://142.93.235.231/api/addUser", userJson);
 
-
-                    // De gebruiker wordt eerst voor de zekerheid uitgelogd
-                    // Zo is er altijd maar een iemand ingelogd
-                    new Thread(new LogOutUserTask(db)).start();
                     // Nieuwe gebruiker wordt aan de room database toegevoegd
                     User newUser = new User(0, username, email, password, true);
-                    new Thread(new InsertUserTask(db, newUser)).start();
+                    InsertUserTask insertUserTask = new InsertUserTask(db, newUser);
+                    Thread thread = new Thread(insertUserTask);
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                     openMainActivity();
                 }
 
                 else {
                     builder.setTitle("Wachtwoorden komen niet overeen");
-                    builder.setPositiveButton("Probeer opnieuw", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("Probeer opnieuw",
+                            new DialogInterface.OnClickListener() {
+
                         @Override
                         public void onClick(DialogInterface dialog, int which) { }
                     });
