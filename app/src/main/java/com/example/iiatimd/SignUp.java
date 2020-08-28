@@ -10,8 +10,13 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -27,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         final EditText inputEmail = findViewById(R.id.inputEmailSignUp);
         final EditText inputPassword = findViewById(R.id.inputPasswordSignUp);
         final EditText inputPasswordVerification = findViewById(R.id.inputPasswordVerificationSignUp);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builderIsNotEqual = new AlertDialog.Builder(this);
         Button submitButtonRegistration = findViewById(R.id.submitButtonSignUp);
 
         RequestQueue queue = VolleySingleton.getInstance(this.getApplicationContext()).getRequestQueue();
@@ -49,11 +54,13 @@ public class SignUp extends AppCompatActivity {
 
                 JSONObject userJson = new JSONObject(userMap);
 
-                // TODO: betere beveiliging maken, gebruiker niet doorsturen als account al bestaat
                 // Als de twee wachtwoord velden gelijk zijn wordt het account toegevoegd anders
                 // krijgt de gebruiker een foutmelding
                 if(inputPassword.getText().toString().equals(
-                        inputPasswordVerification.getText().toString())) {
+                        inputPasswordVerification.getText().toString())
+                        && inputPassword.getText().toString() != null &&
+                        !inputPassword.getText().toString().isEmpty() &&
+                        !inputPassword.getText().toString().equals("null")) {
 
                     API api = new API();
                     api.apiPOST("http://142.93.235.231/api/addUser", userJson);
@@ -72,17 +79,19 @@ public class SignUp extends AppCompatActivity {
                     openMainActivity();
                 }
 
-                else {
-                    builder.setTitle("Wachtwoorden komen niet overeen");
-                    builder.setPositiveButton("Probeer opnieuw",
+                else if(!inputPassword.getText().toString().equals(
+                        inputPasswordVerification.getText().toString())) {
+                    builderIsNotEqual.setTitle("Wachtwoorden komen niet overeen");
+                    builderIsNotEqual.setPositiveButton("Probeer opnieuw",
                             new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) { }
                     });
-                    AlertDialog dialog = builder.create();
+                    AlertDialog dialog = builderIsNotEqual.create();
                     dialog.show();
                 }
+
             }
         });
     }

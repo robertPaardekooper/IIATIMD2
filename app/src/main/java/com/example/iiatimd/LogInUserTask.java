@@ -18,11 +18,5 @@ public class LogInUserTask implements Runnable {
     public void run() {
         db.userDAO().logOutUser();
         db.userDAO().logInUser(email);
-
-        // TODO: log verwijderen
-        List<User> users =  db.userDAO().getAll();
-        for (int i = 0; i < users.size(); i++) {
-            Log.d("User " + i, users.get(i).getName() + " - " + users.get(i).getLoggedIn());
-        }
     }
 }

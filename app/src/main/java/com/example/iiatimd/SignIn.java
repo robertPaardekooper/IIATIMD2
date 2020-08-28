@@ -67,7 +67,6 @@ public class SignIn extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // TODO: code verbeteren, liefst opdelen in meerdere functies
     // Haalt het wachtwoord die bij het e-mailadres hoort op en verifieërd of deze klopt
     // Als deze klopt dan wordt de gebruiker naar de main activity doorgestuurd
     // Anders krijgt de gebruiker een foutmelding
@@ -75,7 +74,10 @@ public class SignIn extends AppCompatActivity {
 
         final AlertDialog.Builder dataIncorrectBuilder = new AlertDialog.Builder(this);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "http://142.93.235.231/api/users/" + email, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                "http://142.93.235.231/api/users/" + email, null,
+                new Response.Listener<JSONObject>() {
+
             @Override
             public void onResponse(JSONObject response) {
                 try {

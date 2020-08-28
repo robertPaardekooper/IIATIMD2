@@ -69,10 +69,6 @@ public class AddProduct extends Activity  {
 
         VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
-
-
-        // TODO: houdbaarheidsdatum aanpassen zo dat gebruiker geen foute data kan versturen
-
         addProductButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -103,11 +99,6 @@ public class AddProduct extends Activity  {
                 // Niew product wordt toegevoegd aan laravel API
                 API api = new API();
                 api.apiPOST("http://142.93.235.231/api/addProductInList", productJson);
-
-                // Nieuw product wordt toegevoegd aan room database
-                // TODO: product aan room database toevoegen voor offline gebruik
-//                Product newProduct = new Product(0, name, barcode, date, note);
-//                new Thread(new InsertProductTask(db, newProduct)).start();
 
                 openList();
             }

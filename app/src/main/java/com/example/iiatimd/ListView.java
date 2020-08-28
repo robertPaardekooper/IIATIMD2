@@ -79,6 +79,16 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
             holder.note.setText("");
         }
 
+        // Houdbaarheidsdatum wordt niet weergeven als deze null is
+        if (products[position].getExpirationDate() != null &&
+                !products[position].getExpirationDate().isEmpty() &&
+                !products[position].getExpirationDate().equals("null")) {
+
+            holder.note.setText(products[position].getExpirationDate());
+        } else {
+            holder.note.setText("");
+        }
+
         // Als product over de datum is dan wordt het rood gekleurd
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
@@ -128,7 +138,6 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
                 VolleySingleton.getInstance(holder.itemView.getContext())
                         .addToRequestQueue(jsonObjectRequest);
 
-                // TODO: refresh pagina
                 Intent intent = new Intent (v.getContext(), List.class);
                 holder.itemView.getContext().startActivity(intent);
             }
