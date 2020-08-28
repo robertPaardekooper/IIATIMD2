@@ -61,7 +61,10 @@ public class List extends AppCompatActivity implements View.OnClickListener{
         }
         String email = getLoggedInUserEmailTask.getEmail();
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://142.93.235.231/api/productsInList/email/" + email, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                "http://142.93.235.231/api/productsInList/email/" + email,
+                null, new Response.Listener<JSONArray>() {
+
             @Override
             public void onResponse(JSONArray response) {
 
