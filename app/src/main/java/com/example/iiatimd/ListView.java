@@ -87,7 +87,7 @@ public class ListView extends RecyclerView.Adapter<ListView.ProductViewHolder> {
             Date expirationDate = sdf.parse(products[position].getExpirationDate());
 
             if(currentDate.after(expirationDate)) {
-                holder.date.setTextColor(Color.parseColor("#FA5858"));
+                //holder.date.setTextColor(Color.parseColor("#FA5858"));
             }
         } catch (ParseException e) {
             e.printStackTrace();

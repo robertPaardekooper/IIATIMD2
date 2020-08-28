@@ -20,7 +20,7 @@
 
     <string name="product_name">Naam</string>
     <string name="expiration_date">Houdbaarheidsdatum</string>
-    <string name="expiration_date_hint">Dag - Maand - Jaar </string>
+    <string name="expiration_date_hint">Jaar - Maand - Dag </string>
     <string name="note">Notitie</string>
     <string name="add_product">Voeg toe</string>
 
